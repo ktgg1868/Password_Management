@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+</head>
+<body>
+    <h1>Password Generator</h1>
+    <form id="passwordForm">
+        <label for="keyword">Keyword:</label>
+        <input type="text" id="keyword" name="keyword">
+        <button type="button" onclick="generatePassword()">Generate Password</button>
+    </form>
+    <p id="generatedPassword"></p>
+    <p id="hashedPassword"></p>
+
+    <script>
+        function generatePassword() {
+            var keyword = document.getElementById("keyword").value;
+            var randomChars = generateRandomChars(15 - keyword.length);
+            var combinedString = Math.random() > 0.5 ? randomChars + keyword : keyword + randomChars;
+
+            var hashedPassword = sha256(combinedString);
+            var generatedPassword = combinedString;
+
+            document.getElementById("hashedPassword").innerText = "Hashed Password: " + hashedPassword;
+            document.getElementById("generatedPassword").innerText = "Generated Password: " + generatedPassword;
+        }
+
+        function generateRandomChars(length) {
+            var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}[]|:;<>,.?/~';
+            var randomString = '';
+            for (var i = 0; i < length; i++) {
+                var randomIndex = Math.floor(Math.random() * chars.length);
+                randomString += chars[randomIndex];
+            }
+            return randomString;
+        }
+
+        // SHA-256 해시 함수
+        function sha256(ascii) {
+            function rightRotate(value, amount) {
+                return (value >>> amount) | (value << (32 - amount));
+            }
+
+        }
+    </script>
+</body>
+</html>

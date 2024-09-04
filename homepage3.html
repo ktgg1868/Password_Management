@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스워드 생성 프로그램</title>
+    <style>
+        * {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>패스워드 생성</h1><br>
+    <input type="text" id="keyword" placeholder="키워드 입력">
+    <button onclick="generatePassword()">생성</button><br>
+    <input type="number" id="Numlength" placeholder="글자수 입력 (기본값:15)"> 암호 길이 입력
+    <br>
+    <label for="uppercase">대문자 포함</label>
+    <input type="checkbox" id="uppercase">
+    <br>
+    <label for="lowercase">소문자 포함</label>
+    <input type="checkbox" id="lowercase">
+    <br>
+    <label for="numbers">숫자 포함</label>
+    <input type="checkbox" id="numbers">
+    <br>
+    <label for="special">특수문자 포함</label>
+    <input type="checkbox" id="special">
+    <br><br>
+    생성된 비밀번호 <p id='password'></p>
+    암호화된 비밀번호값 <p id="hashpassword"></p>
+
+    <script>
+        function generatePassword() {
+            const keyword = document.getElementById('keyword').value;
+            const Numlength = parseInt(document.getElementById('Numlength').value) || 10;
+            const includeUppercase = document.getElementById('uppercase').checked;
+            const includeLowercase = document.getElementById('lowercase').checked;
+            const includeNumbers = document.getElementById('numbers').checked;
+            const includeSpecial = document.getElementById('special').checked;
+
+            // 체크하지 않은 옵션에 대한 알림 표시
+            if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSpecial) {
+                alert('한 가지 이상 체크해 주세요');
+                return; // 실행되지 않도록 종료
+            }
+
+            // 키워드의 길이
+            const keywordLength = keyword.length;
+
+            // 불규칙한 문자열 설정
+            let randomChars = '';
+            if (includeUppercase) randomChars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (includeLowercase) randomChars += 'abcdefghijklmnopqrstuvwxyz';
+            if (includeNumbers) randomChars += '0123456789';
+            if (includeSpecial) randomChars += '!@#$%^&*()';
+            
+            // 생성할 문자열 길이 설정
+            const randomCharsLength = Numlength - keywordLength;
+            
+            // 불규칙한 문자열 생성
+            const additionalChars = Array.from({ length: randomCharsLength }, () => {
+                return randomChars[Math.floor(Math.random() * randomChars.length)];
+            }).join('');
+
+            // 불규칙한 문자열을 키워드 앞이나 뒤에 삽입
+            const combinedString = Math.random() < 0.5 ? additionalChars + keyword : keyword + additionalChars;
+            document.getElementById('password').textContent = combinedString;
+
+            // 최종 비밀번호 해시화 (SHA-256)
+            const hashedPassword = new TextEncoder().encode(combinedString);
+            crypto.subtle.digest('SHA-256', hashedPassword).then(hashArray => {
+                const hashHex = Array.from(new Uint8Array(hashArray))
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join('');
+                document.getElementById('hashpassword').textContent = hashHex;
+            });
+        }
+    </script>
+</body>
+</html>
