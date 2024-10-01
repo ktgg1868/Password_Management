@@ -1,10 +1,10 @@
 <?php
 session_start();  // 로그인된 사용자의 ID를 세션에서 확인
 
-$servername = "localhost";
-$db_username = "Master_User";
-$db_password = "qwe123";
-$dbname = "password_manager";
+$servername = "********"; //Server Name
+$db_username = "********"; //DB_User Name
+$db_password = "********"; //DB_User Password
+$dbname = "********"; //DB Name
 
 // MySQL 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
