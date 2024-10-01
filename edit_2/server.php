@@ -2,12 +2,12 @@
 session_start();  // 로그인된 사용자의 ID를 세션에서 확인
 
 $servername = "localhost";
-$username = "root";
-$password = "your_password";
+$db_username = "Master_User";
+$db_password = "qwe123";
 $dbname = "password_manager";
 
 // MySQL 연결
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
