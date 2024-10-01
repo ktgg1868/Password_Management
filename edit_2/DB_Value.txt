@@ -1,7 +1,7 @@
 CREATE TABLE passwords (
     id INT AUTO_INCREMENT PRIMARY KEY, -- 패스워드 레코드의 고유 ID
     user_id INT,                       -- 해당 패스워드의 사용자 ID (외래 키)
-	keyword VARCHAR(255),
+    keyword VARCHAR(255),
     service_name VARCHAR(100),         -- 패스워드가 저장된 서비스 이름 (예: Gmail, Facebook)
     service_username VARCHAR(100),     -- 서비스에서 사용하는 사용자 이름 또는 이메일
     service_password VARCHAR(255),     -- 해당 서비스의 패스워드 (암호화된 상태)
@@ -13,6 +13,6 @@ CREATE TABLE passwords (
 
 create table users (
     id int auto_increment primary key,     --사용자 레코드의 고유 ID
-	username varchar(100) unique not null, --사용자
+    username varchar(100) unique not null, --사용자
     password varchar(100) not null unique  --패스워드 (암호화된 상태)
 );
