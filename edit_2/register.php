@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "your_mysql_password";
-$dbname = "password_manager";
+$servername = "********"; //Server Name
+$db_username = "********"; //DB_User Name
+$db_password = "********"; //DB_User Password
+$dbname = "********"; //DB Name
 
 // MySQL 연결
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
 // 연결 확인
 if ($conn->connect_error) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // 사용자명 중복 확인
-    $sql = "SELECT id FROM users WHERE username = '$username'";
+    $sql = "SELECT username FROM users WHERE username = '$username'";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
@@ -34,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // 비밀번호 해시 처리
-    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    // 비밀번호 해싱
+    $hashed_password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
 
     // 사용자 추가
-    $sql = "INSERT INTO users (username, password_hash) VALUES ('$username', '$password_hash')";
+    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
     if ($conn->query($sql) === TRUE) {
         echo "회원가입이 성공적으로 완료되었습니다.";
         header("Location: login.html");  // 회원가입 후 로그인 페이지로 리다이렉트
