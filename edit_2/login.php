@@ -31,8 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$isPasswordCorrect) {
         echo '<title>로그인</title>';
         echo '<h2>로그인 에러</h2>';
-        echo "존재하지 않는 사용자입니다.";
-        echo '<br><form action="register.html"><button type="submit">회원가입</button></form>';  
+        echo '<p>존재하지 않는 사용자입니다.</p>';
+        echo '<div style="display: flex; gap: 10px; height: 25px;">
+        <form action="register.html"><button type="submit">회원가입</button></form>
+        <form action="login.html"><button type="submit">돌아가기</button></form>
+        </div>';
     } else {
         // 사용자 인증 성공
         $_SESSION['user_id'] = $row['username'];

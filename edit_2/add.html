@@ -72,7 +72,7 @@
                 document.getElementById('hashpassword').textContent = hashHex;
 
                 // 비밀번호와 해시된 값을 서버로 전송
-                fetch('server.php', {
+                fetch('server_edit.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -80,9 +80,12 @@
                     body: JSON.stringify({
                         keyword: keyword,
                         password: combinedString,
-                        hashpassword: hashHex
+                        hashpassword: hashHex,
+                        service_username: document.getElementById('service_username').value,  // 사용자 이름
+                        url: document.getElementById('url').value  // 서비스 URL   
                     })
-                }).then(response => response.json())
+                })
+                .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         alert('비밀번호가 성공적으로 저장되었습니다.');
@@ -90,6 +93,10 @@
                     } else {
                         alert('비밀번호 저장에 실패했습니다.');
                     }
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
+                    alert('오류가 발생했습니다. 콘솔을 확인하세요.');
                 });
             });
         }

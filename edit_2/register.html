@@ -7,19 +7,20 @@
 </head>
 <body>
     <h2>회원가입</h2>
-    <form action="register.php" method="POST">
-        <label for="username">사용자명</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <label for="password_confirm">비밀번호 확인</label>
-        <input type="password" id="password_confirm" name="password_confirm" required><br><br>
-        <button type="submit">회원가입</button>
-    </form>
+    <div>
+        <form action="register.php" method="POST">
+            <label for="username">사용자명</label>
+            <input type="text" id="username" name="username" size="15" required><br><br>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" size="15" required><br><br>
+            <label for="password_confirm">재확인</label>
+            <input type="password" id="password_confirm" name="password_confirm" size="17" required><br><br>
+            <div  style="display: flex; gap: 10px;">
+                <button type="submit">회원가입</button>
+                <button type="button" onclick="location.href='login.html'">로그인</button>
+            </div>            
+        </form>
+    </div>
     
-    <br><br>
-
-    <a>이미 계정이 있으신가요?</a>
-    <a href="login.html">로그인</a>
 </body>
 </html>

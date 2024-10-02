@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 추가</title>
+</head>
+<body>
+    <h1>비밀번호 추가</h1>
+
+    <form id="passwordForm">
+        <label for="keyword">키워드:</label>
+        <input type="text" id="keyword" name="keyword" required><br><br>
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="service_username">서비스 사용자 이름:</label>
+        <input type="text" id="service_username" name="service_username"><br><br>
+
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url"><br><br>
+
+        <button type="submit">저장</button>
+    </form>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                keyword: document.getElementById('keyword').value,
+                password: document.getElementById('password').value,
+                service_username: document.getElementById('service_username').value,
+                url: document.getElementById('url').value
+            };
+
+            fetch('server_edit.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('비밀번호가 성공적으로 저장되었습니다.');
+                    // 폼 초기화 또는 다른 작업 수행
+                } else {
+                    alert('오류 발생: ' + data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('오류가 발생했습니다. 콘솔을 확인해주세요.');
+            });
+        });
+    </script>
+</body>
+</html>
