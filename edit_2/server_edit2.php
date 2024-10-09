@@ -36,7 +36,7 @@ $user_id = intval($_SESSION['user_id']);  // 정수로 변환
 
 // 데이터베이스에 데이터 삽입
 $sql = "INSERT INTO passwords (user_id, keyword, service_password, service_username, url) 
-        VALUES (?, ?, ?, ?, ?)";
+        VALUES ('$user_id', '$keyword', '$password', '$service_username', '$url')";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("issss", $user_id, $keyword, $password, $service_username, $url);

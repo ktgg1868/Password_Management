@@ -59,12 +59,3 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
-
-| id               | int          | NO   | PRI | NULL              | auto_increment    |
-| user_id          | int          | YES  | MUL | NULL              |                   |
-| keyword          | varchar(255) | YES  |     | NULL              |                   |
-| service_name     | varchar(100) | YES  |     | NULL              |                   |
-| service_username | varchar(100) | YES  |     | NULL              |                   |
-| service_password | varchar(255) | YES  |     | NULL              |                   |
-| url              | varchar(255) | YES  |     | NULL              |                   |
-| created_at       | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
