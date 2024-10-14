@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스워드 수정</title>
+</head>
+<body>
+    <h1>패스워드 수정</h1>
+    <form action="edit.php" method="post">
+        <input type="hidden" name="id" value="1"> <!-- 수정할 데이터의 ID -->
+        
+        <label for="user_id">사용자 ID:</label>
+        <input type="text" id="user_id" name="user_id" value="test" required><br><br>
+
+        <label for="keyword">키워드:</label>
+        <input type="text" id="keyword" name="keyword" value="green" required><br><br>
+
+        <label for="service_name">서비스 이름:</label>
+        <input type="text" id="service_name" name="service_name" value=""><br><br>
+
+        <label for="service_username">서비스 사용자 이름:</label>
+        <input type="text" id="service_username" name="service_username" value="test123" required><br><br>
+
+        <label for="service_password">서비스 패스워드:</label>
+        <input type="password" id="service_password" name="service_password" required><br><br>
+
+        <label for="url">서비스 URL:</label>
+        <input type="url" id="url" name="url" value="www.naver.com"><br><br>
+
+        <button type="submit">수정하기</button>
+    </form>
+</body>
+</html>
