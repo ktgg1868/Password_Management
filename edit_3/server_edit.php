@@ -14,10 +14,10 @@ if (!isset($_SESSION['user_id'])) {
 $data = json_decode(file_get_contents('php://input'), true);
 
 // DB 연결
-$servername = "localhost";
-$db_username = "Master_User";
-$db_password = "qwe123";
-$dbname = "password_manager";
+$servername = ""; //Server Name
+$db_username = ""; //DB_User Name
+$db_password = ""; //DB_User Password
+$dbname = ""; //DB Name
 
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
