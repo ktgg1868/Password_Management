@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost"; //Server Name
-$db_username = "Master_User"; //DB_User Name
-$db_password = "qwe123"; //DB_User Password
-$dbname = "password_manager"; //DB Name
+$servername = "********"; //Server Name
+$db_username = "********"; //DB_User Name
+$db_password = "********"; //DB_User Password
+$dbname = "********"; //DB Name
 
 // 데이터베이스 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
@@ -30,7 +30,8 @@ if ($delete_option == 'id') {
 
 // 쿼리 실행
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $value); // 모든 조건에서 value는 문자열로 처리
+// 모든 조건에서 value는 문자열로 처리
+$stmt->bind_param("s", $value); 
 
 if ($stmt->execute()) {
     echo "패스워드가 성공적으로 삭제되었습니다.";

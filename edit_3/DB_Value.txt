@@ -2,7 +2,7 @@ CREATE TABLE passwords (
     id INT AUTO_INCREMENT PRIMARY KEY, -- 패스워드 레코드의 고유 ID
     user_id INT,                       -- 해당 패스워드의 사용자 ID (외래 키)
     keyword VARCHAR(255),
-    service_name VARCHAR(100),         -- 패스워드가 저장된 서비스 이름 (예: Gmail, Facebook)
+    service_domain VARCHAR(100),         -- 패스워드가 저장된 서비스 이름 (예: Gmail, Facebook)
     service_username VARCHAR(100),     -- 서비스에서 사용하는 사용자 이름 또는 이메일
     service_password VARCHAR(255),     -- 해당 서비스의 패스워드 (암호화된 상태)
     url VARCHAR(255),                  -- 서비스 URL (예: https://www.gmail.com)
@@ -34,7 +34,7 @@ Passwords Table Attribute
 | id               | int          | NO   | PRI | NULL              | auto_increment    |
 | user_id          | varchar(100) | YES  | MUL | NULL              |                   |
 | keyword          | varchar(255) | YES  |     | NULL              |                   |
-| service_name     | varchar(100) | YES  |     | NULL              |                   |
+| service_domain   | varchar(100) | YES  |     | NULL              |                   |
 | service_username | varchar(100) | YES  |     | NULL              |                   |
 | service_password | varchar(255) | YES  |     | NULL              |                   |
 | hashpassword     | varchar(255) | YES  |     | NULL              |                   |

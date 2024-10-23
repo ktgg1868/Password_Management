@@ -76,7 +76,7 @@
                 document.getElementById('hashpassword').textContent = hashHex;
 
                 // 비밀번호와 해시된 값을 서버로 전송
-                fetch('server_edit.php', {
+                fetch('server.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

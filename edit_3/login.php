@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost"; //Server Name
-$db_username = "Master_User"; //DB_User Name
-$db_password = "qwe123"; //DB_User Password
-$dbname = "password_manager"; //DB Name
+$servername = "********"; //Server Name
+$db_username = "********"; //DB_User Name
+$db_password = "********"; //DB_User Password
+$dbname = "********"; //DB Name
 
 
 // MySQL 연결
@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // 사용자 인증 성공
         $_SESSION['user_id'] = $row['username'];
-        header("Location: manage_password.php");  // 비밀번호 관리 페이지로 리다이렉트
+        // 비밀번호 관리 페이지로 리다이렉트
+        header("Location: manage_password.php");  
         exit();
     }
 

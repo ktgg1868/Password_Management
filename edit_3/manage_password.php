@@ -7,10 +7,10 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$servername = "localhost"; //Server Name
-$db_username = "root"; //DB_User Name
-$db_password = "qwe123!!"; //DB_User Password
-$dbname = "password_manager"; //DB Name
+$servername = "********"; //Server Name
+$db_username = "********"; //DB_User Name
+$db_password = "********"; //DB_User Password
+$dbname = "********"; //DB Name
 
 // MySQL 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
@@ -25,7 +25,7 @@ $user_id = $_SESSION['user_id'];
 
 
 // 비밀번호 목록 가져오기
-$sql = "SELECT user_id, keyword, service_name , service_username, service_password, url, created_at, hashpassword FROM passwords WHERE user_id = '$user_id'";
+$sql = "SELECT user_id, keyword, service_domain , service_username, service_password, url, created_at, hashpassword FROM passwords WHERE user_id = '$user_id'";
 $result = $conn->query($sql);
 ?>
 
@@ -69,7 +69,7 @@ $result = $conn->query($sql);
             <tbody>
                 <?php while($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td ><?= htmlspecialchars($row['service_name']) ?></td>
+                    <td ><?= htmlspecialchars($row['service_domain']) ?></td>
                     <td><?= htmlspecialchars($row['service_username']) ?></td>
                     <td><?= htmlspecialchars($row['service_password']) ?></td>
                     <td><?= htmlspecialchars($row['hashpassword']) ?></td>
