@@ -14,10 +14,10 @@ if (!isset($_SESSION['user_id'])) {
 $data = json_decode(file_get_contents('php://input'), true);
 
 // DB 연결
-$servername = ""; //Server Name
-$db_username = ""; //DB_User Name
-$db_password = ""; //DB_User Password
-$dbname = ""; //DB Name
+$servername = "localhost";
+$db_username = "Master_User";
+$db_password = "qwe123";
+$dbname = "password_manager";
 
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
@@ -26,6 +26,16 @@ if ($conn->connect_error) {
     echo json_encode(['success' => false, 'message' => 'DB connection failed']);
     exit();
 }
+
+/*
+// POST된 데이터 받기
+$keyword = $conn->real_escape_string($data['keyword']);
+$password = $conn->real_escape_string($data['password']);
+$hashpassword = $conn->real_escape_string($data['hashpassword']);
+$user_id = $_SESSION['user_id'];  // 세션에서 user_id 가져오기
+
+// DB에 비밀번호 저장
+$sql = "INSERT INTO passwords (user_id, keyword, password, hashpassword) VALUES ('$user_id', '$keyword', '$password', '$hashpassword')"; */
 
 // POST된 데이터에서 값 추출
 $keyword = $conn->real_escape_string($data['keyword']); //키워드

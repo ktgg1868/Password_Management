@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = ""; //Server Name
-$db_username = ""; //DB_User Name
-$db_password = ""; //DB_User Password
-$dbname = ""; //DB Name
+$servername = "localhost"; //Server Name
+$db_username = "Master_User"; //DB_User Name
+$db_password = "qwe123"; //DB_User Password
+$dbname = "password_manager"; //DB Name
 
 // 데이터베이스 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
@@ -21,9 +21,9 @@ $value = $_POST['value'];
 
 // 삭제 쿼리 준비
 if ($delete_option == 'id') {
-    $sql = "DELETE FROM passwords WHERE id=?";
-} elseif ($delete_option == 'user_id') {
-    $sql = "DELETE FROM passwords WHERE user_id=?";
+    $sql = "DELETE FROM passwords WHERE service_username=?";
+} elseif ($delete_option == 'keyword') {
+    $sql = "DELETE FROM passwords WHERE keyword=?";
 } elseif ($delete_option == 'service_name') {
     $sql = "DELETE FROM passwords WHERE service_name=?";
 }

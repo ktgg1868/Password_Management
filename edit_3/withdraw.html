@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탈퇴 확인</title>
+    <style>
+        .button-container {
+            display: flex;
+            gap: 10px; /* 버튼 사이의 간격 */
+        }
+    </style>
+</head>
+<body>
+    <h2>회원 탈퇴 확인</h2>
+    <p>정말로 계정을 탈퇴하시겠습니까?</p>
+    <div class="button-container">
+        <form action="withdraw.php" method="POST">
+            <button type="submit">확인</button>
+        </form>
+        <form action="manage_password.php" method="GET">
+            <button type="submit">취소</button>
+        </form>
+    </div>
+</body>
+</html>

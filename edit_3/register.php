@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = ""; //Server Name
-$db_username = ""; //DB_User Name
-$db_password = ""; //DB_User Password
-$dbname = ""; //DB Name
+$servername = "localhost"; //Server Name
+$db_username = "root"; //DB_User Name
+$db_password = "qwe123!!"; //DB_User Password
+$dbname = "password_manager"; //DB Name
 
 // MySQL 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $conn->real_escape_string($_POST['username']);
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
@@ -45,6 +45,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         echo "회원가입 중 오류가 발생했습니다: " . $conn->error;
+    }
+}
+
+$conn->close();
+?>
+
+<br>
+<a href="register.html"><button>돌아가기</button></a>
+<a href="login.html"><button>로그인</button></a>*/
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
+
+    // 비밀번호 확인
+    if ($password !== $password_confirm) {
+        echo "비밀번호가 일치하지 않습니다.";
+        echo "<br><a href='register.html'><button>돌아가기</button></a>&nbsp;&nbsp;";
+        echo "<a href='login.html'><button>로그인</button></a>";
+        exit();
+    }
+
+    // 사용자명 중복 확인
+    $sql = "SELECT username FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        echo "이미 사용 중인 사용자명입니다.";
+        echo "<br><a href='register.html'><button>돌아가기</button></a>&nbsp;&nbsp;";
+        echo "<a href='login.html'><button>로그인</button></a>";
+        exit();
+    }
+
+    // 비밀번호 해싱
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT); 
+
+    // 사용자 추가
+    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+    if ($conn->query($sql) === TRUE) {
+        echo "회원가입이 성공적으로 완료되었습니다.";
+        // 회원가입 성공 후 버튼 출력
+        echo "<br><a href='login.html'><button>로그인</button></a>";
+    } else {
+        echo "회원가입 중 오류가 발생했습니다: " . $conn->error;
+        echo "<br><a href='register.html'><button>돌아가기</button></a>";
     }
 }
 

@@ -7,10 +7,10 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$servername = ""; //Server Name
-$db_username = ""; //DB_User Name
-$db_password = ""; //DB_User Password
-$dbname = ""; //DB Name
+$servername = "localhost"; //Server Name
+$db_username = "root"; //DB_User Name
+$db_password = "qwe123!!"; //DB_User Password
+$dbname = "password_manager"; //DB Name
 
 // MySQL 연결
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
@@ -23,7 +23,6 @@ if ($conn->connect_error) {
 // 로그인된 사용자 ID
 $user_id = $_SESSION['user_id'];  
 
-//id | user_id | keyword | service_name | service_username | service_password | url            | created_at
 
 // 비밀번호 목록 가져오기
 $sql = "SELECT user_id, keyword, service_name , service_username, service_password, url, created_at, hashpassword FROM passwords WHERE user_id = '$user_id'";
@@ -41,6 +40,10 @@ $result = $conn->query($sql);
             border : 1px solid black;
             border-collapse : collapse;
         };
+
+        .button-container {
+            margin: 10px;
+        };
     </style>
 </head>
 <body>
@@ -57,7 +60,6 @@ $result = $conn->query($sql);
                 <tr>
                     <th>서비스 이름</th>
                     <th>아이디</th>
-                    <th>키워드</th>
                     <th>비밀번호</th>
                     <th>해시</th>
                     <th>주소</th>
@@ -69,7 +71,6 @@ $result = $conn->query($sql);
                 <tr>
                     <td ><?= htmlspecialchars($row['service_name']) ?></td>
                     <td><?= htmlspecialchars($row['service_username']) ?></td>
-                    <td><?= htmlspecialchars($row['keyword']) ?></td>
                     <td><?= htmlspecialchars($row['service_password']) ?></td>
                     <td><?= htmlspecialchars($row['hashpassword']) ?></td>
                     <td><?= htmlspecialchars($row['url']) ?></td>
@@ -82,9 +83,14 @@ $result = $conn->query($sql);
 
     <br><br>
 
-    <form action="logout.php" method="POST">
-        <button type="submit">로그아웃</button>
-    </form> 
+    <div class="button-container">
+        <form action="logout.php" method="POST" style="display: inline;">
+            <button type="submit">로그아웃</button>
+        </form>
+        <form action="withdraw.html" method="POST" style="display: inline;">
+            <button type="submit">탈퇴하기</button>
+        </form>
+    </div>
 
 </body>
 </html>
