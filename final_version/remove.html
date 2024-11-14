@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스워드 삭제</title>
+</head>
+<body>
+    <h1>패스워드 삭제</h1>
+    <form action="remove.php" method="post">
+        <label for="delete_option">삭제 조건 선택:</label>
+        <select id="delete_option" name="delete_option" required>
+            <option value="id">ID로 삭제</option>
+            <option value="keyword">키워드로 삭제</option>
+            <option value="service_name">서비스 이름으로 삭제</option>
+        </select><br><br>
+
+        <label for="value">조건값 입력:</label>
+        <input type="text" id="value" name="value" required><br><br>
+
+        <button type="submit">삭제하기</button>
+    </form>
+</body>
+</html>
